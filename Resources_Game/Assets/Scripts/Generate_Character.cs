@@ -10,15 +10,19 @@ public class Generate_Character : MonoBehaviour
     [SerializeField] private Vector3 startPos; //starting position of model (in front of home base)
 
     [SerializeField] private Button button;
+
+    private GameObject alliedBase;
     void Start()
     {
         button = this.GetComponent<Button>();
+        alliedBase = GameObject.Find("Allied Base");
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        float randomNum = Random.Range(-.5f, .5f); //change the y-values slightly to add some visual variation
+        startPos = new Vector3(alliedBase.transform.position.x + 3, alliedBase.transform.position.y + randomNum, 0);
     }
 
     public void onClick()
