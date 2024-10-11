@@ -18,17 +18,20 @@ public class Health_Manager : MonoBehaviour
         maxHealth = this.gameObject.GetComponentInParent<Movement>().getMaxHealth();
         rt = this.GetComponent<RectTransform>();
 
-        Debug.Log(rt.rect.width);
+        //Debug.Log(rt.rect.width);
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(health/maxHealth);
+    }
+
+    public void takeDamage()
+    {
         health = this.gameObject.GetComponentInParent<Movement>().getHealthPoints();
 
-        rt.sizeDelta = new Vector2 (health/maxHealth, 0);
-
-        Debug.Log(rt.rect.width);
+        rt.sizeDelta = new Vector2(rt.rect.width * (health / maxHealth), rt.rect.height);
     }
 }

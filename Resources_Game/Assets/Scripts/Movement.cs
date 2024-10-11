@@ -11,6 +11,8 @@ public class Movement : MonoBehaviour
     [SerializeField] private float attackSpeed;
     [SerializeField] public float damage;
 
+    private Health_Manager healthManager;
+
     private float contactTime = 0;
     private bool isTouching = false;
 
@@ -22,6 +24,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        healthManager = this.gameObject.GetComponentInChildren<Health_Manager>();
     }
 
     // Update is called once per frame
@@ -70,6 +73,7 @@ public class Movement : MonoBehaviour
             if (contactTime >= enemy.GetComponent<Movement>().attackSpeed)
             {
                 healthPoints -= enemy.GetComponent<Movement>().damage;
+                healthManager.takeDamage();
                 contactTime = 0;
             }
             contactTime += Time.deltaTime;
