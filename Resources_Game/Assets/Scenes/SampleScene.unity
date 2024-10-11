@@ -611,6 +611,7 @@ GameObject:
   m_Component:
   - component: {fileID: 568747960}
   - component: {fileID: 568747959}
+  - component: {fileID: 568747961}
   m_Layer: 0
   m_Name: Enemy Base
   m_TagString: Untagged
@@ -685,6 +686,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &568747961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568747958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 607afce14b11c67458cb046fb0469149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyType1: {fileID: 368368434740617007, guid: 3c22f6332b8aafe4d958ebb7e2e0a773, type: 3}
+  enemyType2: {fileID: 5635368316875125092, guid: 939e84f426423a544be76ddce7385a91, type: 3}
+  enemyType3: {fileID: 1209056831274952786, guid: a407d9a74d778e74d9107b8627fc7330, type: 3}
 --- !u!1 &1106215975
 GameObject:
   m_ObjectHideFlags: 0
