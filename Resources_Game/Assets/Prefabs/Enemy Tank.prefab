@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 1295499129080827084}
   - component: {fileID: -3912527672999664602}
   m_Layer: 0
-  m_Name: Tank
-  m_TagString: Ally
+  m_Name: Enemy Tank
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,7 +33,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 972185386567941630}
+  - {fileID: 1945435703743211328}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7603698632226996699
@@ -172,12 +172,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d61158606a6d5742aa76f67ac12418f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: -3
   maxHealth: 15
   healthPoints: 15
   attackSpeed: 2
   damage: 1
---- !u!1001 &8569253158616371648
+--- !u!1001 &7020668006501305214
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -274,8 +274,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 928d773e77da6124986a3eb952cc24d4, type: 3}
---- !u!224 &972185386567941630 stripped
+--- !u!224 &1945435703743211328 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8904178510307535934, guid: 928d773e77da6124986a3eb952cc24d4, type: 3}
-  m_PrefabInstance: {fileID: 8569253158616371648}
+  m_PrefabInstance: {fileID: 7020668006501305214}
   m_PrefabAsset: {fileID: 0}

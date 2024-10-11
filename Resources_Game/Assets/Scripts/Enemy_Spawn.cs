@@ -21,13 +21,13 @@ public class EnemyManager : MonoBehaviour
 
     void Start()
     {
-        StartLevel(currentLevel);
+        //StartLevel(currentLevel);
     }
 
     void Update()
     {
         levelDuration += Time.deltaTime;
-        AdjustSpawnTime();
+        //AdjustSpawnTime();
     }
 
     public void StartLevel(int level)
