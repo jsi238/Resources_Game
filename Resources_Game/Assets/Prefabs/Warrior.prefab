@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6955748729978006768}
   - component: {fileID: 7720004332698977479}
   - component: {fileID: 2154926560813011275}
+  - component: {fileID: 8212449019943459253}
   m_Layer: 0
   m_Name: Warrior
   m_TagString: Ally
@@ -31,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 236.00362, y: 125.939285, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 334622975654099121}
@@ -199,6 +200,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8212449019943459253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209056831274952786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b65e73b5e75ef24fb121da24e8f49b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9166284289569445007
 PrefabInstance:
   m_ObjectHideFlags: 0

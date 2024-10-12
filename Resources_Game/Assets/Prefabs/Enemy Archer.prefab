@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3722300247442927283}
   - component: {fileID: -5299189266181184013}
   - component: {fileID: 8612552218370641893}
+  - component: {fileID: -177737654845622}
   m_Layer: 0
   m_Name: Enemy Archer
   m_TagString: Enemy
@@ -31,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7027924210773407525}
@@ -200,6 +201,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-177737654845622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368368434740617007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b65e73b5e75ef24fb121da24e8f49b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectTag: 
 --- !u!1 &8929045481609664854
 GameObject:
   m_ObjectHideFlags: 0

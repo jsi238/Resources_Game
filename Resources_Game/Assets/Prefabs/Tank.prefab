@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1295499129080827084}
   - component: {fileID: -3912527672999664602}
   - component: {fileID: 8545581206672225036}
+  - component: {fileID: -5150450899554610360}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Ally
@@ -31,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 236.00362, y: 125.939285, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 972185386567941630}
@@ -199,6 +200,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-5150450899554610360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5635368316875125092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b65e73b5e75ef24fb121da24e8f49b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8569253158616371648
 PrefabInstance:
   m_ObjectHideFlags: 0
