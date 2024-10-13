@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
@@ -14,13 +15,24 @@ public class GameController : MonoBehaviour
     private float currentCooldownTime = 0f;
     private bool canUseUltimate = true;
 
-    public Text moneyText;
-    public Text ultimateStatusText;
+    public TextMeshProUGUI moneyText;
+    public TextMeshProUGUI ultimateStatusText;
+    public TextMeshProUGUI moneyLevelText;
+    public Button levelUpButton;
+    public Button ultimateButton;
+
+    public int levelUpCostMultiplier = 50;
+    public GameObject[] walletLevelIndicators;
 
     void Start()
     {
         StartCoroutine(GenerateMoney());
         UpdateUI();
+
+        levelUpButton.onClick.AddListener(LevelUpMoney);
+        ultimateButton.onClick.AddListener(UseUltimatePower);
+
+        ActivateWalletLevelIndicator();
     }
 
     IEnumerator GenerateMoney()
@@ -39,13 +51,22 @@ public class GameController : MonoBehaviour
 
     public void LevelUpMoney()
     {
-        if (moneyLevel < maxMoneyLevel)
+        int upgradeCost = GetLevelUpCost();
+        if (money >= upgradeCost && moneyLevel < maxMoneyLevel)
         {
             moneyLevel++;
             moneyGenerationRate += 10;
             moneyCap += 50;
+            money -= upgradeCost;
+
+            ActivateWalletLevelIndicator();
             UpdateUI();
         }
+    }
+
+    private int GetLevelUpCost()
+    {
+        return moneyLevel * levelUpCostMultiplier;
     }
 
     public void UseUltimatePower()
@@ -74,7 +95,28 @@ public class GameController : MonoBehaviour
 
     private void UpdateUI()
     {
-        moneyText.text = "Money: $" + money + " / $" + moneyCap;
-        ultimateStatusText.text = canUseUltimate ? "Ultimate Ready" : "Ultimate Cooldown: " + Mathf.CeilToInt(ultimateCooldownTime - currentCooldownTime) + "s";
+        if (moneyText != null)
+            moneyText.text = "Money: $" + money + " / $" + moneyCap;
+
+        if (ultimateStatusText != null)
+            ultimateStatusText.text = canUseUltimate ? "Ultimate Ready" : "Ultimate Cooldown: " + Mathf.CeilToInt(ultimateCooldownTime - currentCooldownTime) + "s";
+
+        if (moneyLevelText != null)
+            moneyLevelText.text = "Wallet Level: " + moneyLevel + "/" + maxMoneyLevel + "\nUpgrade Cost: $" + GetLevelUpCost();
+
+        levelUpButton.interactable = money >= GetLevelUpCost() && moneyLevel < maxMoneyLevel;
+        ultimateButton.interactable = canUseUltimate;
+    }
+
+    private void ActivateWalletLevelIndicator()
+    {
+        if (walletLevelIndicators != null && moneyLevel - 1 < walletLevelIndicators.Length)
+        {
+            GameObject indicator = walletLevelIndicators[moneyLevel - 1];
+            if (indicator != null)
+            {
+                indicator.SetActive(true);
+            }
+        }
     }
 }
