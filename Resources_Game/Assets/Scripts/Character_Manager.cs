@@ -15,6 +15,7 @@ public class Character_Manager : MonoBehaviour
     private GameObject closestTarget;
 
     private Collider2D myCollider;
+    private Animator animator;
 
     private float contactTime = 0; //checks how much time objects have been in contact with one another
 
@@ -32,6 +33,7 @@ public class Character_Manager : MonoBehaviour
             isAlly = false;
         }
 
+        animator = GetComponent<Animator>();
         Debug.Log("Is this object an ally: " + isAlly);
 
         //health_manager = this.gameObject.GetComponentInChildren<Health_Manager>();
@@ -98,6 +100,7 @@ public class Character_Manager : MonoBehaviour
         else
         {
             StopMovement();
+            AttackEnemy(closestTarget);
         }
     }
 
@@ -109,6 +112,9 @@ public class Character_Manager : MonoBehaviour
         {
             rb.velocity = direction * moveSpeed;
         }
+
+        animator.SetBool("isMoving", true);
+        animator.SetBool("isAttacking", false);
     }
 
     void StopMovement()
@@ -118,6 +124,13 @@ public class Character_Manager : MonoBehaviour
         {
             rb.velocity = Vector2.zero;
         }
+
+        animator.SetBool("isMoving", false);
+    }
+
+    void AttackEnemy(GameObject target)
+    {
+        animator.SetBool("isAttacking", true);
     }
 
     public float getMaxHitPoints()
