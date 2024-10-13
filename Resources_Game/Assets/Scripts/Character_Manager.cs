@@ -54,11 +54,11 @@ public class Character_Manager : MonoBehaviour
     {
         if (isAlly)
         {
-            HandleMovement("Enemy"); //allies head towards enemies
+            HandleMovement("Enemy Center"); //allies head towards enemies
         }
         else
         {
-            HandleMovement("Ally"); //enemies head toward allies
+            HandleMovement("Ally Center"); //enemies head toward allies
         }
     }
 

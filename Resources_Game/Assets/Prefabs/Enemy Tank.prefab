@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2377054039470784224
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5037589714729910997}
+  m_Layer: 0
+  m_Name: Enemy Center
+  m_TagString: Enemy Center
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5037589714729910997
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2377054039470784224}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: -0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6535664952111592405}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5635368316875125092
 GameObject:
   m_ObjectHideFlags: 0
@@ -33,7 +64,8 @@ Transform:
   m_LocalScale: {x: -2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1945435703743211328}
+  - {fileID: 6709868009639407975}
+  - {fileID: 5037589714729910997}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7603698632226996699
@@ -148,13 +180,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b65e73b5e75ef24fb121da24e8f49b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stoppingDistance: 5
+  stoppingDistance: 1
   moveSpeed: 2
   attackSpeed: 1
   damage: 2
   hitPoints: 10
   maxHitPoints: 10
---- !u!1001 &7020668006501305214
+--- !u!1001 &2778653119399877977
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -164,7 +196,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5201231884643436670, guid: 928d773e77da6124986a3eb952cc24d4, type: 3}
       propertyPath: m_Name
-      value: Canvas
+      value: Enemy Health
+      objectReference: {fileID: 0}
+    - target: {fileID: 6567383588576581534, guid: 928d773e77da6124986a3eb952cc24d4, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8904178510307535934, guid: 928d773e77da6124986a3eb952cc24d4, type: 3}
       propertyPath: m_Pivot.x
@@ -251,8 +287,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 928d773e77da6124986a3eb952cc24d4, type: 3}
---- !u!224 &1945435703743211328 stripped
+--- !u!224 &6709868009639407975 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8904178510307535934, guid: 928d773e77da6124986a3eb952cc24d4, type: 3}
-  m_PrefabInstance: {fileID: 7020668006501305214}
+  m_PrefabInstance: {fileID: 2778653119399877977}
   m_PrefabAsset: {fileID: 0}
