@@ -15,7 +15,7 @@ public class Health_Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        maxHealth = this.gameObject.GetComponentInParent<Movement>().getMaxHealth();
+        maxHealth = this.gameObject.GetComponentInParent<Character_Manager>().getMaxHitPoints();
         rt = this.GetComponent<RectTransform>();
 
         //Debug.Log(rt.rect.width);
@@ -25,12 +25,12 @@ public class Health_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(health/maxHealth);
+
     }
 
     public void takeDamage()
     {
-        health = this.gameObject.GetComponentInParent<Movement>().getHealthPoints();
+        health = this.gameObject.GetComponentInParent<Character_Manager>().getCurrentHitPoints();
 
         rt.sizeDelta = new Vector2(rt.rect.width * (health / maxHealth), rt.rect.height);
     }
