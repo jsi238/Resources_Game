@@ -25,9 +25,17 @@ public class GameController : MonoBehaviour
     public GameObject[] walletLevelIndicators;
 
     private bool gameOver = false;
+
+    public Image ultimateVisualEffect;
+    private Camera mainCamera;
+
+    public float shakeMagnitude = 0.2f;
+    public float shakeDuration = 0.5f;
+
     void Start()
     {
         gameOver = false;
+        mainCamera = Camera.main;
 
         StartCoroutine(GenerateMoney());
         UpdateUI();
@@ -76,10 +84,42 @@ public class GameController : MonoBehaviour
     {
         if (canUseUltimate)
         {
+            StartCoroutine(ActivateUltimateVisualEffect());
+            StartCoroutine(CameraShake(shakeDuration, shakeMagnitude));
+
             currentCooldownTime = 0f;
             canUseUltimate = false;
             UpdateUI();
         }
+    }
+
+    IEnumerator ActivateUltimateVisualEffect()
+    {
+        if (ultimateVisualEffect != null)
+        {
+            ultimateVisualEffect.gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.1f);
+            ultimateVisualEffect.gameObject.SetActive(false);
+        }
+    }
+
+    IEnumerator CameraShake(float duration, float magnitude)
+    {
+        Vector3 originalPos = mainCamera.transform.position;
+        float elapsedTime = 0.0f;
+
+        while (elapsedTime < duration)
+        {
+            float xShake = Random.Range(-1f, 1f) * magnitude;
+            float yShake = Random.Range(-1f, 1f) * magnitude;
+
+            mainCamera.transform.position = new Vector3(originalPos.x + xShake, originalPos.y + yShake, originalPos.z);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        mainCamera.transform.position = originalPos;
     }
 
     void Update()
