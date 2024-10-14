@@ -186,7 +186,10 @@ public class Character_Manager : MonoBehaviour
     {
         Slider health = this.GetComponentInChildren<Slider>();
 
-        health.value = health.maxValue * hitPoints / maxHitPoints;
+        if (health != null)
+        {
+            health.value = health.maxValue * hitPoints / maxHitPoints;
+        }
     }
 
     //Setters and getter that might be useful later
