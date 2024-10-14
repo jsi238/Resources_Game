@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Character_Manager : MonoBehaviour
 {
@@ -21,9 +23,13 @@ public class Character_Manager : MonoBehaviour
 
     private Health_Manager health_manager;
 
+    private GameObject[] enemies;
+
     private bool isAlly;
     void Start()
     {
+        hitPoints = maxHitPoints;
+
         if (gameObject.tag == "Ally")
         {
             isAlly = true;
@@ -34,7 +40,6 @@ public class Character_Manager : MonoBehaviour
         }
 
         animator = GetComponent<Animator>();
-        Debug.Log("Is this object an ally: " + isAlly);
 
         //health_manager = this.gameObject.GetComponentInChildren<Health_Manager>();
         /*
@@ -60,13 +65,20 @@ public class Character_Manager : MonoBehaviour
         {
             HandleMovement("Ally Center"); //enemies head toward allies
         }
+
+        CharacterDeath();
+
+        AdjustHealth();
     }
 
     void HandleMovement(string target)
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag(target);
+        enemies = GameObject.FindGameObjectsWithTag(target);
 
-        //Debug.Log(enemies.Length);
+        if (isAlly)
+        {
+            Debug.Log("Number of enemies detected: " + enemies.Length);
+        }
 
         foreach (GameObject enemy in enemies)
         {
@@ -86,21 +98,25 @@ public class Character_Manager : MonoBehaviour
 
                 //Debug.Log("Distance to enemy is: " + distanceToEnemy);
 
-
             }
             else
             {
                 distanceToEnemy = Mathf.Infinity;
             }
         }
-        if (minDistanceToEnemy > stoppingDistance)
+
+        if (closestTarget != null)
         {
-            MoveTowardsEnemy(closestTarget);
-        }
-        else
-        {
-            StopMovement();
-            AttackEnemy(closestTarget);
+            if (minDistanceToEnemy > stoppingDistance)
+            {
+                MoveTowardsEnemy(closestTarget);
+            }
+            else
+            {
+                contactTime += Time.deltaTime;
+                StopMovement();
+                AttackEnemy(closestTarget);
+            }
         }
     }
 
@@ -131,19 +147,64 @@ public class Character_Manager : MonoBehaviour
     void AttackEnemy(GameObject target)
     {
         animator.SetBool("isAttacking", true);
+        if (contactTime >= attackSpeed)
+        {
+            DamageTarget(target);
+            contactTime = 0;
+        }
     }
 
-    public float getMaxHitPoints()
+    public void DealDamage(GameObject target, float damage)
+    {
+        target.GetComponentInParent<Character_Manager>().hitPoints -= damage;
+    }
+
+    public void DamageTarget(GameObject target)
+    {
+        target.GetComponentInParent<Character_Manager>().DealDamage(target, damage);
+    }
+
+    public void CharacterDeath()
+    {
+        if (hitPoints == 0)
+        {
+            Destroy(this.gameObject, 1f);
+        }
+
+        //when an object dies, reset all enemies to search for next closest target
+        foreach (GameObject enemy in enemies)
+        {
+            Character_Manager enemyManager = enemy.GetComponentInParent<Character_Manager>();
+            //Animator enemyAnimator = enemy.GetComponentInParent<Animator>();
+
+            enemyManager.SetMinDistance(Mathf.Infinity);
+            //enemyAnimator.SetBool("isAttacking", false);
+        }
+    }
+
+    public void AdjustHealth()
+    {
+        Slider health = this.GetComponentInChildren<Slider>();
+
+        health.value = health.maxValue * hitPoints / maxHitPoints;
+    }
+
+    //Setters and getter that might be useful later
+    public void SetMinDistance(float newDistance)
+    {
+        minDistanceToEnemy = newDistance;
+    }
+    public float GetMaxHitPoints()
     {
         return maxHitPoints;
     }
 
-    public float getCurrentHitPoints()
+    public float GetCurrentHitPoints()
     {
         return hitPoints;
     }
 
-    public float getDamage()
+    public float GetDamage()
     {
         return damage;
     }
