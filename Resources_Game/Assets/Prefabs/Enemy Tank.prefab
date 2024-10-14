@@ -183,7 +183,7 @@ MonoBehaviour:
   stoppingDistance: 1
   moveSpeed: 2
   attackSpeed: 1
-  damage: 2
+  damage: 1
   hitPoints: 10
   maxHitPoints: 10
   destroyedTower: {fileID: 21300000, guid: 81f2b6af4ed584a4daa9d124915c9900, type: 3}
@@ -201,6 +201,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: f559a5be384f8c947b6f6582e4b1d7a6, type: 3}
+    - target: {fileID: 1591539900064646810, guid: 44d1991ff7863e04c8414ecdcda04f58, type: 3}
+      propertyPath: m_Direction
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2678483209633403837, guid: 44d1991ff7863e04c8414ecdcda04f58, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -208,6 +212,10 @@ PrefabInstance:
     - target: {fileID: 2678483209633403837, guid: 44d1991ff7863e04c8414ecdcda04f58, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678483209633403837, guid: 44d1991ff7863e04c8414ecdcda04f58, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.8005066
       objectReference: {fileID: 0}
     - target: {fileID: 4594933415095617931, guid: 44d1991ff7863e04c8414ecdcda04f58, type: 3}
       propertyPath: m_Pivot.x

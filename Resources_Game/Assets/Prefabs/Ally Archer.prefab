@@ -152,7 +152,7 @@ MonoBehaviour:
   stoppingDistance: 5
   moveSpeed: 2
   attackSpeed: 1
-  damage: 4
+  damage: 6
   hitPoints: 10
   maxHitPoints: 10
   destroyedTower: {fileID: 21300000, guid: 81f2b6af4ed584a4daa9d124915c9900, type: 3}

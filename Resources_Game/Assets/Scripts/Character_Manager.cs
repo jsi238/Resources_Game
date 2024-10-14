@@ -162,7 +162,7 @@ public class Character_Manager : MonoBehaviour
             if (this.gameObject.name == "Allied Base" || this.gameObject.name == "Enemy Base")
             {
                 this.gameObject.GetComponent<SpriteRenderer>().sprite = destroyedTower;
-                GameObject.Find("Game Controller").GetComponent<GameController>().setGameOverStatus(true);
+                //GameObject.Find("Game Controller").GetComponent<GameController>().setGameOverStatus(true);
             }
             else
             {
@@ -178,10 +178,8 @@ public class Character_Manager : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
             Character_Manager enemyManager = enemy.GetComponentInParent<Character_Manager>();
-            //Animator enemyAnimator = enemy.GetComponentInParent<Animator>();
 
             enemyManager.SetMinDistance(Mathf.Infinity);
-            //enemyAnimator.SetBool("isAttacking", false);
         }
     }
 

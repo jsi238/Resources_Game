@@ -154,7 +154,7 @@ MonoBehaviour:
   attackSpeed: 1
   damage: 2
   hitPoints: 10
-  maxHitPoints: 10
+  maxHitPoints: 15
   destroyedTower: {fileID: 21300000, guid: 81f2b6af4ed584a4daa9d124915c9900, type: 3}
   attackAnimation: {fileID: 7400000, guid: 45204e1dbfd5e74489fcd9490648c1fa, type: 2}
   deathAnimation: {fileID: 7400000, guid: 5586f46037d39764ab7905561f52bc2c, type: 2}
@@ -201,6 +201,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: f559a5be384f8c947b6f6582e4b1d7a6, type: 3}
+    - target: {fileID: 1591539900064646810, guid: 44d1991ff7863e04c8414ecdcda04f58, type: 3}
+      propertyPath: m_Value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1591539900064646810, guid: 44d1991ff7863e04c8414ecdcda04f58, type: 3}
+      propertyPath: m_Direction
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2678483209633403837, guid: 44d1991ff7863e04c8414ecdcda04f58, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -208,6 +216,10 @@ PrefabInstance:
     - target: {fileID: 2678483209633403837, guid: 44d1991ff7863e04c8414ecdcda04f58, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678483209633403837, guid: 44d1991ff7863e04c8414ecdcda04f58, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.8005066
       objectReference: {fileID: 0}
     - target: {fileID: 4594933415095617931, guid: 44d1991ff7863e04c8414ecdcda04f58, type: 3}
       propertyPath: m_Pivot.x
