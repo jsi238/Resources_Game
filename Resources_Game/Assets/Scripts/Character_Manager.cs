@@ -21,6 +21,10 @@ public class Character_Manager : MonoBehaviour
 
     private float contactTime = 0; //checks how much time objects have been in contact with one another
 
+    private Health_Manager health_manager;
+
+    private GameObject[] enemies;
+
     private bool isAlly;
     void Start()
     {
@@ -34,8 +38,6 @@ public class Character_Manager : MonoBehaviour
         }
 
         animator = GetComponent<Animator>();
-<<<<<<< Updated upstream
-        Debug.Log("Is this object an ally: " + isAlly);
 
         //health_manager = this.gameObject.GetComponentInChildren<Health_Manager>();
         /*
@@ -49,8 +51,6 @@ public class Character_Manager : MonoBehaviour
             }
         }
         */
-=======
->>>>>>> Stashed changes
     }
 
     void Update()
@@ -96,31 +96,19 @@ public class Character_Manager : MonoBehaviour
                 distanceToEnemy = Mathf.Infinity;
             }
         }
-        if (minDistanceToEnemy > stoppingDistance)
+
+        if (closestTarget != null)
         {
-<<<<<<< Updated upstream
-            MoveTowardsEnemy(closestTarget);
-        }
-        else
-        {
-            StopMovement();
-            AttackEnemy(closestTarget);
-=======
             if (minDistanceToEnemy > stoppingDistance)
             {
-                animator.SetBool("isMoving", true);
-                animator.SetBool("isAttacking", false);
                 MoveTowardsEnemy(closestTarget);
             }
             else
             {
-                animator.SetBool("isMoving", false);
-                animator.SetBool("isAttacking", true);
                 contactTime += Time.deltaTime;
                 StopMovement();
                 AttackEnemy(closestTarget);
             }
->>>>>>> Stashed changes
         }
     }
 
@@ -145,24 +133,7 @@ public class Character_Manager : MonoBehaviour
 
     void AttackEnemy(GameObject target)
     {
-<<<<<<< Updated upstream
         animator.SetBool("isAttacking", true);
-    }
-
-    public float getMaxHitPoints()
-    {
-        return maxHitPoints;
-    }
-
-    public float getCurrentHitPoints()
-    {
-        return hitPoints;
-    }
-
-    public float getDamage()
-    {
-        return damage;
-=======
         if (contactTime >= attackSpeed)
         {
             DamageTarget(target);
@@ -184,14 +155,7 @@ public class Character_Manager : MonoBehaviour
     {
         if (hitPoints == 0)
         {
-            if (this.gameObject.name == "Enemy Base" || this.gameObject.name == "Allied Base")
-            {
-                this.gameObject.GetComponent<SpriteRenderer>().sprite = destroyedBase;
-            }
-            else
-            {
-                Destroy(this.gameObject);
-            }
+            Destroy(this.gameObject, 1f);
         }
 
         //when an object dies, reset all enemies to search for next closest target
@@ -219,6 +183,19 @@ public class Character_Manager : MonoBehaviour
     public void SetMinDistance(float newDistance)
     {
         minDistanceToEnemy = newDistance;
->>>>>>> Stashed changes
+    }
+    public float GetMaxHitPoints()
+    {
+        return maxHitPoints;
+    }
+
+    public float GetCurrentHitPoints()
+    {
+        return hitPoints;
+    }
+
+    public float GetDamage()
+    {
+        return damage;
     }
 }
