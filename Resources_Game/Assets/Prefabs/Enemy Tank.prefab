@@ -186,7 +186,12 @@ MonoBehaviour:
   damage: 2
   hitPoints: 10
   maxHitPoints: 10
+<<<<<<< Updated upstream
 --- !u!1001 &2778653119399877977
+=======
+  destroyedBase: {fileID: 21300000, guid: 81f2b6af4ed584a4daa9d124915c9900, type: 3}
+--- !u!1001 &6404275241120266300
+>>>>>>> Stashed changes
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -264,11 +269,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8904178510307535934, guid: 928d773e77da6124986a3eb952cc24d4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -0.38
       objectReference: {fileID: 0}
     - target: {fileID: 8904178510307535934, guid: 928d773e77da6124986a3eb952cc24d4, type: 3}
       propertyPath: m_AnchoredPosition.y
+<<<<<<< Updated upstream
       value: 0.020004272
+=======
+      value: 22.54
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 8904178510307535934, guid: 928d773e77da6124986a3eb952cc24d4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

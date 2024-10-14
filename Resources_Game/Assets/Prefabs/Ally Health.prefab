@@ -84,8 +84,13 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+<<<<<<< Updated upstream:Resources_Game/Assets/Prefabs/Ally Health.prefab
   m_PresetInfoIsWorld: 0
 --- !u!114 &8560483958118198526
+=======
+  m_PresetInfoIsWorld: 1
+--- !u!114 &4938892833366954116
+>>>>>>> Stashed changes:Resources_Game/Assets/Prefabs/Health Bar.prefab
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

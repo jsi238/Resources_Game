@@ -17,9 +17,9 @@ public class Character_Manager : MonoBehaviour
     private Collider2D myCollider;
     private Animator animator;
 
-    private float contactTime = 0; //checks how much time objects have been in contact with one another
+    [SerializeField] private Sprite destroyedBase;
 
-    private Health_Manager health_manager;
+    private float contactTime = 0; //checks how much time objects have been in contact with one another
 
     private bool isAlly;
     void Start()
@@ -34,6 +34,7 @@ public class Character_Manager : MonoBehaviour
         }
 
         animator = GetComponent<Animator>();
+<<<<<<< Updated upstream
         Debug.Log("Is this object an ally: " + isAlly);
 
         //health_manager = this.gameObject.GetComponentInChildren<Health_Manager>();
@@ -48,6 +49,8 @@ public class Character_Manager : MonoBehaviour
             }
         }
         */
+=======
+>>>>>>> Stashed changes
     }
 
     void Update()
@@ -95,12 +98,29 @@ public class Character_Manager : MonoBehaviour
         }
         if (minDistanceToEnemy > stoppingDistance)
         {
+<<<<<<< Updated upstream
             MoveTowardsEnemy(closestTarget);
         }
         else
         {
             StopMovement();
             AttackEnemy(closestTarget);
+=======
+            if (minDistanceToEnemy > stoppingDistance)
+            {
+                animator.SetBool("isMoving", true);
+                animator.SetBool("isAttacking", false);
+                MoveTowardsEnemy(closestTarget);
+            }
+            else
+            {
+                animator.SetBool("isMoving", false);
+                animator.SetBool("isAttacking", true);
+                contactTime += Time.deltaTime;
+                StopMovement();
+                AttackEnemy(closestTarget);
+            }
+>>>>>>> Stashed changes
         }
     }
 
@@ -112,9 +132,6 @@ public class Character_Manager : MonoBehaviour
         {
             rb.velocity = direction * moveSpeed;
         }
-
-        animator.SetBool("isMoving", true);
-        animator.SetBool("isAttacking", false);
     }
 
     void StopMovement()
@@ -124,12 +141,11 @@ public class Character_Manager : MonoBehaviour
         {
             rb.velocity = Vector2.zero;
         }
-
-        animator.SetBool("isMoving", false);
     }
 
     void AttackEnemy(GameObject target)
     {
+<<<<<<< Updated upstream
         animator.SetBool("isAttacking", true);
     }
 
@@ -146,5 +162,63 @@ public class Character_Manager : MonoBehaviour
     public float getDamage()
     {
         return damage;
+=======
+        if (contactTime >= attackSpeed)
+        {
+            DamageTarget(target);
+            contactTime = 0;
+        }
+    }
+
+    public void DealDamage(GameObject target, float damage)
+    {
+        target.GetComponentInParent<Character_Manager>().hitPoints -= damage;
+    }
+
+    public void DamageTarget(GameObject target)
+    {
+        target.GetComponentInParent<Character_Manager>().DealDamage(target, damage);
+    }
+
+    public void CharacterDeath()
+    {
+        if (hitPoints == 0)
+        {
+            if (this.gameObject.name == "Enemy Base" || this.gameObject.name == "Allied Base")
+            {
+                this.gameObject.GetComponent<SpriteRenderer>().sprite = destroyedBase;
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }
+        }
+
+        //when an object dies, reset all enemies to search for next closest target
+        foreach (GameObject enemy in enemies)
+        {
+            Character_Manager enemyManager = enemy.GetComponentInParent<Character_Manager>();
+            //Animator enemyAnimator = enemy.GetComponentInParent<Animator>();
+
+            enemyManager.SetMinDistance(Mathf.Infinity);
+            //enemyAnimator.SetBool("isAttacking", false);
+        }
+    }
+
+    public void AdjustHealth()
+    {
+        Slider health = this.GetComponentInChildren<Slider>();
+
+        if (health != null)
+        {
+            health.value = health.maxValue * hitPoints / maxHitPoints;
+        }
+    }
+
+    //Setters and getter that might be useful later
+    public void SetMinDistance(float newDistance)
+    {
+        minDistanceToEnemy = newDistance;
+>>>>>>> Stashed changes
     }
 }
