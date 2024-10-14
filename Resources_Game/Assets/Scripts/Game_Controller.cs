@@ -132,4 +132,15 @@ public class GameController : MonoBehaviour
     {
         gameOver = value;
     }
+
+    public bool SpendMoney(int amount)
+    {
+        if (money >= amount)
+        {
+            money -= amount;
+            UpdateUI();
+            return true;
+        }
+        return false;
+    }
 }

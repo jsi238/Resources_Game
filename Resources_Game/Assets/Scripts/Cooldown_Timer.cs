@@ -1,14 +1,30 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Cooldown_Timer : MonoBehaviour
+public class CooldownTimer : MonoBehaviour
 {
     public int cooldownDuration = 5;
     public Text cooldownText;
     public Button cooldownButton;
+    public int price;
+    public Text priceText;
 
+    private GameController gameController;
     private bool isOnCooldown = false;
     private float cooldownTimeLeft;
+
+    void Start()
+    {
+        gameController = FindObjectOfType<GameController>();
+
+        if (priceText != null)
+        {
+            priceText.text = "$" + price;
+        }
+
+        cooldownButton.onClick.AddListener(OnButtonClick);
+        cooldownText.gameObject.SetActive(false);
+    }
 
     void Update()
     {
@@ -22,20 +38,27 @@ public class Cooldown_Timer : MonoBehaviour
                 EndCooldown();
             }
         }
+
+        cooldownButton.interactable = gameController.money >= price && !isOnCooldown;
     }
 
-    public void StartCooldown()
+    void OnButtonClick()
     {
-        if (!isOnCooldown)
+        if (gameController.SpendMoney(price))
         {
-            isOnCooldown = true;
-            cooldownTimeLeft = cooldownDuration;
-            cooldownButton.interactable = false;
-            cooldownText.gameObject.SetActive(true);
+            StartCooldown();
         }
     }
 
-    private void EndCooldown()
+    void StartCooldown()
+    {
+        isOnCooldown = true;
+        cooldownTimeLeft = cooldownDuration;
+        cooldownButton.interactable = false;
+        cooldownText.gameObject.SetActive(true);
+    }
+
+    void EndCooldown()
     {
         isOnCooldown = false;
         cooldownText.gameObject.SetActive(false);
