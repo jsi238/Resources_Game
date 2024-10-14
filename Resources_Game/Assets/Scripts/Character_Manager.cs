@@ -171,7 +171,7 @@ public class Character_Manager : MonoBehaviour
                 contactTime = 0;
                 Destroy(this.gameObject, deathAnimation.length);
             }
-            
+
         }
 
         //when an object dies, reset all enemies to search for next closest target

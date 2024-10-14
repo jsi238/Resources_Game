@@ -87,9 +87,26 @@ public class GameController : MonoBehaviour
             StartCoroutine(ActivateUltimateVisualEffect());
             StartCoroutine(CameraShake(shakeDuration, shakeMagnitude));
 
+            DealDamageToEnemies(5); // change ult damage here
+
             currentCooldownTime = 0f;
             canUseUltimate = false;
             UpdateUI();
+        }
+    }
+
+    void DealDamageToEnemies(float damageAmount)
+    {
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject enemy in allEnemies)
+        {
+            Character_Manager enemyManager = enemy.GetComponent<Character_Manager>();
+
+            if (enemyManager != null)
+            {
+                enemyManager.DealDamage(enemy, damageAmount);
+            }
         }
     }
 
