@@ -24,8 +24,11 @@ public class GameController : MonoBehaviour
     public int levelUpCostMultiplier = 50;
     public GameObject[] walletLevelIndicators;
 
+    private bool gameOver = false;
     void Start()
     {
+        gameOver = false;
+
         StartCoroutine(GenerateMoney());
         UpdateUI();
 
@@ -118,5 +121,15 @@ public class GameController : MonoBehaviour
                 indicator.SetActive(true);
             }
         }
+    }
+
+    public bool getGameOverStatus()
+    {
+        return gameOver;
+    }
+
+    public void setGameOverStatus(bool value)
+    {
+        gameOver = value;
     }
 }

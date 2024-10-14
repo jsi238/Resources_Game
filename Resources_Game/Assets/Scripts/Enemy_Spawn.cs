@@ -10,6 +10,7 @@ public class EnemyManager : MonoBehaviour
 
     private float levelDuration = 0f;
     private float maxLevelTime = 120f;
+    private float timeBeforeSpawn = 5f;
 
     private float startSpawnTime = 5.0f;
     private float minSpawnTime = 1.5f;
@@ -19,15 +20,19 @@ public class EnemyManager : MonoBehaviour
 
     private int currentLevel = 1;
 
+    private GameController GameController;
+
     void Start()
     {
-        //StartLevel(currentLevel);
+        GameController = GameObject.Find("Game Controller").GetComponent<GameController>();
+        StartLevel(currentLevel);
     }
 
     void Update()
     {
         levelDuration += Time.deltaTime;
-        //AdjustSpawnTime();
+        if (GameController.getGameOverStatus())
+            AdjustSpawnTime();
     }
 
     public void StartLevel(int level)
@@ -52,6 +57,7 @@ public class EnemyManager : MonoBehaviour
         {
             StopCoroutine(spawnCoroutine);
         }
+
         spawnCoroutine = StartCoroutine(SpawnEnemies());
     }
 
@@ -74,8 +80,8 @@ public class EnemyManager : MonoBehaviour
     {
         List<GameObject> enemiesToSpawn = new List<GameObject>();
 
-        if (currentLevel >= 1) enemiesToSpawn.Add(enemyType1);
-        if (currentLevel >= 2) enemiesToSpawn.Add(enemyType2);
+        if (currentLevel >= 1) enemiesToSpawn.Add(enemyType2);
+        if (currentLevel >= 2) enemiesToSpawn.Add(enemyType1);
         if (currentLevel >= 3) enemiesToSpawn.Add(enemyType3);
 
         foreach (var enemyPrefab in enemiesToSpawn)

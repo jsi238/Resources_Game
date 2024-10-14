@@ -16,8 +16,10 @@ public class Character_Manager : MonoBehaviour
     private float minDistanceToEnemy = Mathf.Infinity;
     private GameObject closestTarget;
 
-    private Collider2D myCollider;
+    [SerializeField] private Sprite destroyedTower;
     private Animator animator;
+    [SerializeField] private AnimationClip attackAnimation;
+    [SerializeField] private AnimationClip deathAnimation;
 
     private float contactTime = 0; //checks how much time objects have been in contact with one another
 
@@ -41,18 +43,7 @@ public class Character_Manager : MonoBehaviour
 
         animator = GetComponent<Animator>();
 
-        //health_manager = this.gameObject.GetComponentInChildren<Health_Manager>();
-        /*
-        myCollider = GetComponent<Collider2D>();
-        Collider2D[] nearbyObjects = FindObjectsOfType<Collider2D>();
-        foreach (var collider in nearbyObjects)
-        {
-            if (collider.gameObject != this.gameObject && collider.gameObject.tag == gameObject.tag)
-            {
-                Physics2D.IgnoreCollision(collider, myCollider);
-            }
-        }
-        */
+        attackSpeed = attackAnimation.length;
     }
 
     void Update()
@@ -147,7 +138,7 @@ public class Character_Manager : MonoBehaviour
     void AttackEnemy(GameObject target)
     {
         animator.SetBool("isAttacking", true);
-        if (contactTime >= attackSpeed)
+        if (contactTime >= attackSpeed && target.GetComponentInParent<Character_Manager>().GetCurrentHitPoints() > 0)
         {
             DamageTarget(target);
             contactTime = 0;
@@ -166,9 +157,21 @@ public class Character_Manager : MonoBehaviour
 
     public void CharacterDeath()
     {
-        if (hitPoints == 0)
+        if (hitPoints <= 0)
         {
-            Destroy(this.gameObject, 1f);
+            if (this.gameObject.name == "Allied Base" || this.gameObject.name == "Enemy Base")
+            {
+                this.gameObject.GetComponent<SpriteRenderer>().sprite = destroyedTower;
+                GameObject.Find("Game Controller").GetComponent<GameController>().setGameOverStatus(true);
+            }
+            else
+            {
+                animator.SetBool("isDead", true);
+                animator.SetBool("isAttacking", false);
+                contactTime = 0;
+                Destroy(this.gameObject, deathAnimation.length);
+            }
+            
         }
 
         //when an object dies, reset all enemies to search for next closest target
