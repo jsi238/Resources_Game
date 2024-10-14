@@ -24,15 +24,15 @@ public class EnemyManager : MonoBehaviour
 
     void Start()
     {
-        GameController = GameObject.Find("Game Controller").GetComponent<GameController>();
+        //GameController = GameObject.Find("Game Controller").GetComponent<GameController>();
         StartLevel(currentLevel);
     }
 
     void Update()
     {
         levelDuration += Time.deltaTime;
-        if (GameController.getGameOverStatus())
-            AdjustSpawnTime();
+        //if (GameController.getGameOverStatus())
+        AdjustSpawnTime();
     }
 
     public void StartLevel(int level)
