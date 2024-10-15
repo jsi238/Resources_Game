@@ -9,7 +9,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GameObject enemyType3;
 
     private float levelDuration = 0f;
-    private float maxLevelTime = 120f;
+    private float maxLevelTime = 90f;
     private float timeBeforeSpawn = 5f;
 
     private float startSpawnTime = 5.0f;
@@ -31,7 +31,10 @@ public class EnemyManager : MonoBehaviour
     void Update()
     {
         levelDuration += Time.deltaTime;
-        //if (GameController.getGameOverStatus())
+        if (levelDuration > maxLevelTime)
+        {
+            NextLevel();
+        }
         AdjustSpawnTime();
     }
 
@@ -40,7 +43,7 @@ public class EnemyManager : MonoBehaviour
         currentLevel = level;
         levelDuration = 0f;
 
-        if (currentLevel <= 3)
+        if (currentLevel < 2)
         {
             startSpawnTime = 5.0f;
             minSpawnTime = 1.5f;
@@ -80,21 +83,19 @@ public class EnemyManager : MonoBehaviour
     {
         List<GameObject> enemiesToSpawn = new List<GameObject>();
 
-        if (currentLevel >= 1) enemiesToSpawn.Add(enemyType2);
+        if (currentLevel >= 1) enemiesToSpawn.Add(enemyType3);
         if (currentLevel >= 2) enemiesToSpawn.Add(enemyType1);
-        if (currentLevel >= 3) enemiesToSpawn.Add(enemyType3);
+        if (currentLevel >= 3) enemiesToSpawn.Add(enemyType2);
 
-        foreach (var enemyPrefab in enemiesToSpawn)
-        {
-            float randomNum = Random.Range(-.5f, .5f); //change the y-values slightly to add some visual variation
-            Vector3 randomPos = new Vector3(
-                transform.position.x - 3,
-                transform.position.y + randomNum,
-                0
+        GameObject enemyPrefab = enemiesToSpawn[Random.Range(0, enemiesToSpawn.Count - 1)];
+        float randomNum = Random.Range(-.5f, .5f); //change the y-values slightly to add some visual variation
+        Vector3 randomPos = new Vector3(
+            transform.position.x - 3,
+            transform.position.y + randomNum,
+            0
             );
 
-            GameObject enemy = Instantiate(enemyPrefab, randomPos, Quaternion.identity);
-        }
+        GameObject enemy = Instantiate(enemyPrefab, randomPos, Quaternion.identity);
     }
 
     public void NextLevel()

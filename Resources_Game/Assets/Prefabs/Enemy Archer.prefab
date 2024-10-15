@@ -150,12 +150,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b65e73b5e75ef24fb121da24e8f49b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stoppingDistance: 5
+  stoppingDistance: 6
   moveSpeed: 2
   attackSpeed: 1
   damage: 2
   hitPoints: 10
-  maxHitPoints: 15
+  maxHitPoints: 40
   destroyedTower: {fileID: 21300000, guid: 81f2b6af4ed584a4daa9d124915c9900, type: 3}
   attackAnimation: {fileID: 7400000, guid: 45204e1dbfd5e74489fcd9490648c1fa, type: 2}
   deathAnimation: {fileID: 7400000, guid: 5586f46037d39764ab7905561f52bc2c, type: 2}
