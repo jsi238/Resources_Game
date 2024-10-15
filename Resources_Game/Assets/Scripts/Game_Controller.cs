@@ -77,7 +77,7 @@ public class GameController : MonoBehaviour
         if (money >= upgradeCost && moneyLevel < maxMoneyLevel)
         {
             moneyLevel++;
-            moneyGenerationRate += 10;
+            moneyGenerationRate += 5;
             moneyCap += 50;
             money -= upgradeCost;
 
@@ -100,7 +100,7 @@ public class GameController : MonoBehaviour
             StartCoroutine(ActivateUltimateVisualEffect());
             StartCoroutine(CameraShake(shakeDuration, shakeMagnitude));
 
-            DealDamageToEnemies(10); // change ult damage
+            DealDamageToEnemies(30); // change ult damage
 
             currentCooldownTime = 0f;
             canUseUltimate = false;
