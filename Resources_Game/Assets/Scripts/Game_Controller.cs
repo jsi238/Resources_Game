@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour
 
     private int ultimateCooldownTime = 30;
     private float currentCooldownTime = 0f;
-    private bool canUseUltimate = true;
+    private bool canUseUltimate = false;
 
     public TextMeshProUGUI moneyText;
     public TextMeshProUGUI ultimateStatusText;
@@ -101,6 +101,8 @@ public class GameController : MonoBehaviour
 
         foreach (GameObject enemy in allEnemies)
         {
+            if (enemy.name == "Enemy Base") continue;
+
             Character_Manager enemyManager = enemy.GetComponent<Character_Manager>();
 
             if (enemyManager != null)
