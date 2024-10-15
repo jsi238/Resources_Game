@@ -221,7 +221,7 @@ public class GameController : MonoBehaviour
                 }
                 else
                 {
-                    ultimateStatusText.text = "Not Enough Money\nCost: $" + ultimateCost;
+                    ultimateStatusText.text = "Ready\nCost: $" + ultimateCost;
                 }
             }
             else
