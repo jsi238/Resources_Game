@@ -1,10 +1,10 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Character_Manager : MonoBehaviour
 {
-    // WIP: distance ally/enemy should stop from opposing team to handle ranged and melee
     public float stoppingDistance = 1.0f;
     public float moveSpeed = 2.0f;
     public float attackSpeed = 1.0f;
@@ -22,12 +22,20 @@ public class Character_Manager : MonoBehaviour
     [SerializeField] private AnimationClip deathAnimation;
 
     private float contactTime = 0; //checks how much time objects have been in contact with one another
-
     private Health_Manager health_manager;
 
     private GameObject[] enemies;
 
     private bool isAlly;
+
+    private AudioSource audioSource;
+
+    public AudioClip attackSound;
+    public float delayTime = 1.0f;
+    public float volume = 1.0f;
+
+    private bool isSoundPlaying = false;
+
     void Start()
     {
         hitPoints = maxHitPoints;
@@ -42,8 +50,12 @@ public class Character_Manager : MonoBehaviour
         }
 
         animator = GetComponent<Animator>();
-
+        audioSource = GetComponent<AudioSource>();
         attackSpeed = attackAnimation.length;
+        if (audioSource != null)
+        {
+            audioSource.volume = volume;
+        }
     }
 
     void Update()
@@ -66,11 +78,6 @@ public class Character_Manager : MonoBehaviour
     {
         enemies = GameObject.FindGameObjectsWithTag(target);
 
-        if (isAlly)
-        {
-            Debug.Log("Number of enemies detected: " + enemies.Length);
-        }
-
         foreach (GameObject enemy in enemies)
         {
             distanceToEnemy = Mathf.Abs(Vector2.Distance(transform.position, enemy.transform.position)); //finds distance from center of ally to center of enemy
@@ -86,9 +93,6 @@ public class Character_Manager : MonoBehaviour
             if (enemyManager != null)
             {
                 float effectiveStoppingDistance = Mathf.Max(stoppingDistance, enemyManager.stoppingDistance);
-
-                //Debug.Log("Distance to enemy is: " + distanceToEnemy);
-
             }
             else
             {
@@ -138,11 +142,31 @@ public class Character_Manager : MonoBehaviour
     void AttackEnemy(GameObject target)
     {
         animator.SetBool("isAttacking", true);
+
+        if (!isSoundPlaying && attackSound != null)
+        {
+            StartCoroutine(PlayAttackSoundWithDelay());
+        }
+
         if (contactTime >= attackSpeed && target.GetComponentInParent<Character_Manager>().GetCurrentHitPoints() > 0)
         {
             DamageTarget(target);
             contactTime = 0;
         }
+    }
+
+    IEnumerator PlayAttackSoundWithDelay()
+    {
+        isSoundPlaying = true;
+
+        if (audioSource != null && attackSound != null)
+        {
+            audioSource.PlayOneShot(attackSound, volume);
+        }
+
+        yield return new WaitForSeconds(attackSound.length + delayTime);
+
+        isSoundPlaying = false;
     }
 
     public void DealDamage(GameObject target, float damage)
@@ -162,7 +186,6 @@ public class Character_Manager : MonoBehaviour
             if (this.gameObject.name == "Allied Base" || this.gameObject.name == "Enemy Base")
             {
                 this.gameObject.GetComponent<SpriteRenderer>().sprite = destroyedTower;
-                //GameObject.Find("Game Controller").GetComponent<GameController>().setGameOverStatus(true);
             }
             else
             {
@@ -171,14 +194,12 @@ public class Character_Manager : MonoBehaviour
                 contactTime = 0;
                 Destroy(this.gameObject, deathAnimation.length);
             }
-
         }
 
         //when an object dies, reset all enemies to search for next closest target
         foreach (GameObject enemy in enemies)
         {
             Character_Manager enemyManager = enemy.GetComponentInParent<Character_Manager>();
-
             enemyManager.SetMinDistance(Mathf.Infinity);
         }
     }
@@ -198,6 +219,7 @@ public class Character_Manager : MonoBehaviour
     {
         minDistanceToEnemy = newDistance;
     }
+
     public float GetMaxHitPoints()
     {
         return maxHitPoints;
