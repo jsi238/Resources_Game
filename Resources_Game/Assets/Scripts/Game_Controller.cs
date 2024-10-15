@@ -170,7 +170,7 @@ public class GameController : MonoBehaviour
             {
                 if (money >= ultimateCost)
                 {
-                    ultimateStatusText.text = "Ultimate Ready\nCost: $" + ultimateCost;
+                    ultimateStatusText.text = "Ready\nCost: $" + ultimateCost;
                 }
                 else
                 {
@@ -179,12 +179,12 @@ public class GameController : MonoBehaviour
             }
             else
             {
-                ultimateStatusText.text = "Cooldown: " + Mathf.CeilToInt(ultimateCooldownTime - currentCooldownTime) + "s\nCost: $" + ultimateCost;
+                ultimateStatusText.text = "Timer: " + Mathf.CeilToInt(ultimateCooldownTime - currentCooldownTime) + "s\nCost: $" + ultimateCost;
             }
         }
 
         if (moneyLevelText != null)
-            moneyLevelText.text = "Wallet Level: " + moneyLevel + "/" + maxMoneyLevel + "\nUpgrade Cost: $" + GetLevelUpCost();
+            moneyLevelText.text = "Level: " + moneyLevel + "/" + maxMoneyLevel + "\nCost: $" + GetLevelUpCost();
 
         levelUpButton.interactable = money >= GetLevelUpCost() && moneyLevel < maxMoneyLevel;
         ultimateButton.interactable = canUseUltimate && money >= ultimateCost;
