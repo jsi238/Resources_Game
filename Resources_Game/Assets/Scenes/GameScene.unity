@@ -426,8 +426,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23
-  m_fontSizeBase: 23
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1302,6 +1302,7 @@ MonoBehaviour:
   moneyGenerationRate: 10
   moneyCap: 200
   maxMoneyLevel: 5
+  ultimateCost: 100
   moneyText: {fileID: 1943423806}
   ultimateStatusText: {fileID: 974451594}
   moneyLevelText: {fileID: 191446380}
@@ -1922,8 +1923,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

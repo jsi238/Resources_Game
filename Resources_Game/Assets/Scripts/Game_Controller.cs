@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour
     private float currentCooldownTime = 0f;
     private bool canUseUltimate = false;
 
+    public int ultimateCost = 100;
+
     public TextMeshProUGUI moneyText;
     public TextMeshProUGUI ultimateStatusText;
     public TextMeshProUGUI moneyLevelText;
@@ -82,12 +84,14 @@ public class GameController : MonoBehaviour
 
     public void UseUltimatePower()
     {
-        if (canUseUltimate)
+        if (canUseUltimate && money >= ultimateCost)
         {
+            money -= ultimateCost;
+
             StartCoroutine(ActivateUltimateVisualEffect());
             StartCoroutine(CameraShake(shakeDuration, shakeMagnitude));
 
-            DealDamageToEnemies(5); // change ult damage here
+            DealDamageToEnemies(5); // change ult damage
 
             currentCooldownTime = 0f;
             canUseUltimate = false;
@@ -161,13 +165,29 @@ public class GameController : MonoBehaviour
             moneyText.text = "Money: $" + money + " / $" + moneyCap;
 
         if (ultimateStatusText != null)
-            ultimateStatusText.text = canUseUltimate ? "Ultimate Ready" : "Ultimate Cooldown: " + Mathf.CeilToInt(ultimateCooldownTime - currentCooldownTime) + "s";
+        {
+            if (canUseUltimate)
+            {
+                if (money >= ultimateCost)
+                {
+                    ultimateStatusText.text = "Ultimate Ready\nCost: $" + ultimateCost;
+                }
+                else
+                {
+                    ultimateStatusText.text = "Not Enough Money\nCost: $" + ultimateCost;
+                }
+            }
+            else
+            {
+                ultimateStatusText.text = "Cooldown: " + Mathf.CeilToInt(ultimateCooldownTime - currentCooldownTime) + "s\nCost: $" + ultimateCost;
+            }
+        }
 
         if (moneyLevelText != null)
             moneyLevelText.text = "Wallet Level: " + moneyLevel + "/" + maxMoneyLevel + "\nUpgrade Cost: $" + GetLevelUpCost();
 
         levelUpButton.interactable = money >= GetLevelUpCost() && moneyLevel < maxMoneyLevel;
-        ultimateButton.interactable = canUseUltimate;
+        ultimateButton.interactable = canUseUltimate && money >= ultimateCost;
     }
 
     private void ActivateWalletLevelIndicator()
