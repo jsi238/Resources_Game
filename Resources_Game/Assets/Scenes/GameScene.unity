@@ -4907,6 +4907,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8986491030693563009, guid: 5bd6ebf2f56b17845b238c43025608e9, type: 3}
+      propertyPath: enemyType1
+      value: 
+      objectReference: {fileID: 5635368316875125092, guid: 939e84f426423a544be76ddce7385a91, type: 3}
+    - target: {fileID: 8986491030693563009, guid: 5bd6ebf2f56b17845b238c43025608e9, type: 3}
+      propertyPath: enemyType2
+      value: 
+      objectReference: {fileID: 368368434740617007, guid: 3c22f6332b8aafe4d958ebb7e2e0a773, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -9,7 +9,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GameObject enemyType3;
 
     private float levelDuration = 0f;
-    private float maxLevelTime = 90f;
+    private float maxLevelTime = 30f;
     private float timeBeforeSpawn = 5f;
 
     private float startSpawnTime = 5.0f;
@@ -45,13 +45,13 @@ public class EnemyManager : MonoBehaviour
 
         if (currentLevel < 2)
         {
-            startSpawnTime = 5.0f;
-            minSpawnTime = 1.5f;
+            startSpawnTime = 7.0f;
+            minSpawnTime = 3f;
         }
         else
         {
-            startSpawnTime = 4.0f;
-            minSpawnTime = 1.0f;
+            startSpawnTime = 4f;
+            minSpawnTime = 1.5f;
         }
 
         currentSpawnTime = startSpawnTime;
@@ -87,7 +87,7 @@ public class EnemyManager : MonoBehaviour
         if (currentLevel >= 2) enemiesToSpawn.Add(enemyType1);
         if (currentLevel >= 3) enemiesToSpawn.Add(enemyType2);
 
-        GameObject enemyPrefab = enemiesToSpawn[Random.Range(0, enemiesToSpawn.Count - 1)];
+        GameObject enemyPrefab = enemiesToSpawn[Random.Range(0, enemiesToSpawn.Count)];
         float randomNum = Random.Range(-.5f, .5f); //change the y-values slightly to add some visual variation
         Vector3 randomPos = new Vector3(
             transform.position.x - 3,
@@ -101,5 +101,6 @@ public class EnemyManager : MonoBehaviour
     public void NextLevel()
     {
         StartLevel(currentLevel + 1);
+        levelDuration = 0;
     }
 }
