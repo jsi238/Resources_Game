@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -22,14 +23,18 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI moneyLevelText;
     public Button levelUpButton;
     public Button ultimateButton;
+    public TextMeshProUGUI gameOverText;
+    public Button restartButton;
 
     public int levelUpCostMultiplier = 50;
     public GameObject[] walletLevelIndicators;
 
-    private bool gameOver = false;
+    public Character_Manager allyBase;
+    public Character_Manager enemyBase;
 
     public Image ultimateVisualEffect;
     private Camera mainCamera;
+    private bool gameOver = false;
 
     public float shakeMagnitude = 0.2f;
     public float shakeDuration = 0.5f;
@@ -45,12 +50,16 @@ public class GameController : MonoBehaviour
         levelUpButton.onClick.AddListener(LevelUpMoney);
         ultimateButton.onClick.AddListener(UseUltimatePower);
 
+        restartButton.onClick.AddListener(RestartGame);
+        restartButton.gameObject.SetActive(false);
+        gameOverText.gameObject.SetActive(false);
+
         ActivateWalletLevelIndicator();
     }
 
     IEnumerator GenerateMoney()
     {
-        while (true)
+        while (!gameOver)
         {
             if (money < moneyCap)
             {
@@ -91,7 +100,7 @@ public class GameController : MonoBehaviour
             StartCoroutine(ActivateUltimateVisualEffect());
             StartCoroutine(CameraShake(shakeDuration, shakeMagnitude));
 
-            DealDamageToEnemies(5); // change ult damage
+            DealDamageToEnemies(10); // change ult damage
 
             currentCooldownTime = 0f;
             canUseUltimate = false;
@@ -147,6 +156,11 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
+        if (!gameOver)
+        {
+            CheckGameOver();
+        }
+
         if (!canUseUltimate)
         {
             currentCooldownTime += Time.deltaTime;
@@ -157,6 +171,39 @@ public class GameController : MonoBehaviour
             }
             UpdateUI();
         }
+    }
+
+    private void CheckGameOver()
+    {
+        if (allyBase.IsDead())
+        {
+            SetGameOver("Lose!");
+        }
+        else if (enemyBase.IsDead())
+        {
+            SetGameOver("Win!");
+        }
+    }
+
+    private void SetGameOver(string resultMessage)
+    {
+        gameOver = true;
+        gameOverText.text = resultMessage;
+        gameOverText.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(true);
+        DisableAllControls();
+    }
+
+    private void DisableAllControls()
+    {
+        levelUpButton.interactable = false;
+        ultimateButton.interactable = false;
+        StopAllCoroutines();
+    }
+
+    private void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void UpdateUI()
@@ -200,16 +247,6 @@ public class GameController : MonoBehaviour
                 indicator.SetActive(true);
             }
         }
-    }
-
-    public bool getGameOverStatus()
-    {
-        return gameOver;
-    }
-
-    public void setGameOverStatus(bool value)
-    {
-        gameOver = value;
     }
 
     public bool SpendMoney(int amount)

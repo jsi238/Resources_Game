@@ -234,4 +234,10 @@ public class Character_Manager : MonoBehaviour
     {
         return damage;
     }
+
+    public bool IsDead()
+    {
+        return hitPoints <= 0;
+    }
+
 }
